@@ -1,60 +1,49 @@
-# ==========================================
-# TODOS LOS BUCLES EN PYTHON
-# ==========================================
-
-# ------------------------------------------
-# 1️⃣ FOR CON LISTA
-# ------------------------------------------
-pares = ["EURUSD", "USDCHF", "GBPUSD"]
-
-for par in pares:
-    print("Lista:", par)
 
 
-# ------------------------------------------
-# 2️⃣ FOR CON RANGE
-# ------------------------------------------
+#1.1 Bucle con rango hasta 3
+
 for i in range(3):
     print("Range:", i)
 
+#1.2 Bucle que genera los primeros 40 numero ,empieza en 2 y va de 2 en 2
 
-# ------------------------------------------
-# 3️⃣ FOR CON DICCIONARIO (SOLO CLAVES)
-# ------------------------------------------
-gdp_data = {
-    "Spain": 1.4,
-    "USA": 25.0,
-    "China": 18.0
+for i in range(2, 41, 2):
+    print(i)
+
+#1.3 grupo de amigos
+
+amigos  = ["Pedro", "Pablo", "Juan"]
+
+for par in amigos:
+    print("Lista:", par)
+
+#1.4 Bucle que va hasta 5 pero si encuentra el 2 se lo salta
+
+for i in range(5):
+    if i == 2:
+        continue
+    print("Continue:", i)
+
+
+# 2 FOR CON DICCIONARIO (SOLO CLAVES),   sin .items() tengo que buscar el valor  con .items() ya lo tengo
+
+
+amigos = {
+    "Daniel": 20,
+    "Lucia": 25,
+    "Carlos": 18
 }
 
-for country in gdp_data:
-    print("Clave:", country)
+for nombre in amigos:
+    print(nombre, "tiene", amigos[nombre], "€")
+
+for nombre, dinero in amigos.items():
+    print(nombre, "tiene", dinero, "€")
 
 
-# ------------------------------------------
-# 4️⃣ FOR CON DICCIONARIO (SOLO VALORES)
-# ------------------------------------------
-for gdp in gdp_data.values():
-    print("Valor:", gdp)
 
+# 3 FOR ANIDADO
 
-# ------------------------------------------
-# 5️⃣ FOR CON DICCIONARIO (CLAVE + VALOR)
-# ------------------------------------------
-for country, gdp in gdp_data.items():
-    print("Clave y valor:", country, gdp)
-
-
-# ------------------------------------------
-# 6️⃣ FOR CON INDICE (enumerate)
-# ------------------------------------------
-for i, par in enumerate(pares):
-    print("Indice:", i, "Valor:", par)
-
-
-# ------------------------------------------
-# 7️⃣ FOR ANIDADO
-# ------------------------------------------
 matriz = [[1,2], [3,4]]
 
 for fila in matriz:
@@ -62,72 +51,19 @@ for fila in matriz:
         print("Anidado:", numero)
 
 
-# ------------------------------------------
-# 8️⃣ WHILE BASICO
-# ------------------------------------------
-i = 0
-while i < 3:
-    print("While:", i)
-    i += 1
+
+# 4 Bucle dentro de bucle anidado
 
 
-# ------------------------------------------
-# 9️⃣ WHILE CON BREAK
-# ------------------------------------------
-i = 0
-while True:
-    print("While infinito:", i)
-    i += 1
-    if i == 3:
-        break
+grupos = [
+    ["Pedro", "Pablo"],
+    ["Juan", "Luis"],
+    ["Ana", "Lucia"]
+]
 
 
-# ------------------------------------------
-# 🔟 FOR CON CONTINUE
-# ------------------------------------------
-for i in range(5):
-    if i == 2:
-        continue
-    print("Continue:", i)
-
-
-# ------------------------------------------
-# 1️⃣1️⃣ FOR CON BREAK
-# ------------------------------------------
-for i in range(5):
-    if i == 3:
-        break
-    print("Break:", i)
-
-
-# ------------------------------------------
-# 1️⃣2️⃣ FOR CON ZIP
-# ------------------------------------------
-paises = ["Spain", "USA", "China"]
-gdp = [1.4, 25.0, 18.0]
-
-for country, value in zip(paises, gdp):
-    print("Zip:", country, value)
-
-
-# ------------------------------------------
-# 1️⃣3️⃣ FOR SOBRE STRING
-# ------------------------------------------
-for letra in "EURUSD":
-    print("String:", letra)
-
-
-# ------------------------------------------
-# 1️⃣4️⃣ WHILE CON INPUT
-# ------------------------------------------
-contador = 0
-while contador < 2:
-    print("While input ejemplo")
-    contador += 1
-
-
-# ------------------------------------------
-# 1️⃣5️⃣ LIST COMPREHENSION (BUCLE COMPACTO)
-# ------------------------------------------
-cuadrados = [x**2 for x in range(5)]
-print("List comprehension:", cuadrados)
+for grupo in grupos:
+    print("Grupo:")
+    
+    for amigo in grupo:
+        print(" -", amigo)

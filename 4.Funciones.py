@@ -1,177 +1,149 @@
 # ==========================================
-# CLASE — API REAL WORLD BANK (ROBUSTA)
+# 1. FUNCIÓN BÁSICA (sin bucles ni condicionales)
 # ==========================================
 
-import requests
+def saludar():
+    print("Hola, bienvenido al programa")
 
-# ------------------------------------------
-# 1️⃣ CONSTANTE (URL API)
-# ------------------------------------------
-API_URL = "https://api.worldbank.org/v2/country/{}/indicator/NY.GDP.MKTP.CD?format=json"
-
-# ------------------------------------------
-# 2️⃣ VARIABLE GLOBAL
-# ------------------------------------------
-paises = ["ESP", "USA", "CHN", "DEU"]
-contador_global = 0
-
-
-# ------------------------------------------
-# 3️⃣ FUNCION BASICA
-# ------------------------------------------
-def saludo():
-    print("Inicio script API")
-
-
-# ------------------------------------------
-# 4️⃣ FUNCION CON RETORNO
-# ------------------------------------------
-def obtener_gdp(country):
-    url = API_URL.format(country)
-
-    try:
-        response = requests.get(url, timeout=5)
-        data = response.json()
-    except:
-        print(f"{country}: error de conexion")
-        return None
-
-    if not isinstance(data, list) or len(data) < 2:
-        return None
-
-    for item in data[1]:
-        if item["value"] is not None:
-            return item["value"]
-
-    return None
-
-
-# ------------------------------------------
-# 5️⃣ FUNCION MULTIPLES PARAMETROS
-# ------------------------------------------
-def mostrar_pib(country, gdp):
-    print(f"{country} tiene PIB {gdp:.2f} USD")
-
-
-# ------------------------------------------
-# 6️⃣ PARAMETROS POR DEFECTO
-# ------------------------------------------
-def mensaje_error(country="Pais"):
-    print(f"{country}: dato no disponible")
-
-
-# ------------------------------------------
-# 7️⃣ *ARGS
-# ------------------------------------------
-def suma_valores(*args):
-    return sum(args)
-
-
-# ------------------------------------------
-# 8️⃣ **KWARGS
-# ------------------------------------------
-def mostrar_info(**kwargs):
-    for k, v in kwargs.items():
-        print(k, v)
-
-
-# ------------------------------------------
-# 9️⃣ FUNCION LAMBDA
-# ------------------------------------------
-doble = lambda x: x * 2
-
-
-# ------------------------------------------
-# 🔟 FUNCION CON ANOTACIONES
-# ------------------------------------------
-def convertir_float(valor: float) -> float:
-    return float(valor)
-
-
-# ------------------------------------------
-# 1️⃣1️⃣ FUNCION GLOBAL
-# ------------------------------------------
-def aumentar_contador():
-    global contador_global
-    contador_global += 1
-
-
-# ------------------------------------------
-# 1️⃣2️⃣ FUNCION ANIDADA
-# ------------------------------------------
-def contenedor():
-    def interna():
-        print("Funcion interna")
-    interna()
-
-
-# ------------------------------------------
-# 1️⃣3️⃣ DECORADOR
-# ------------------------------------------
-def decorador(func):
-    def wrapper(*args, **kwargs):
-        print("Antes funcion")
-        resultado = func(*args, **kwargs)
-        print("Despues funcion")
-        return resultado
-    return wrapper
-
-
-@decorador
-def funcion_decorada():
-    print("Funcion decorada ejecutada")
-
-
-# ------------------------------------------
-# 1️⃣4️⃣ FUNCION GENERADORA
-# ------------------------------------------
-def generador_paises(lista):
-    for p in lista:
-        yield p
+saludar()
 
 
 # ==========================================
-# PROCESAR DATOS API
+# 2. FUNCIÓN CON PARÁMETRO
 # ==========================================
-saludo()
 
-resultados = []
+#Parámetro =>nombre
+#Argumento =>Adib
 
-for country in generador_paises(paises):
+def saludar_persona(nombre):
+    print("Hola "+ nombre)
+    
 
-    aumentar_contador()
+saludar_persona("10")
 
-    gdp = obtener_gdp(country)
+#2.1 FUNCIÓN CON PARÁMETRO ,incluimos un strime
 
-    if gdp is None:
-        mensaje_error(country)
-        continue
+def mostrar_edad(nombre, edad):
+    print("Hola " + nombre + ", tienes " + str(edad) + " años")
 
-    gdp = convertir_float(gdp)
-    mostrar_pib(country, gdp)
-
-    resultados.append((country, gdp))
+mostrar_edad("Adib", 25)
 
 
 # ==========================================
-# TIPOS COMPUESTOS
+# 3. FUNCIÓN CON RETURN
 # ==========================================
-if resultados:
-    lista = [c for c, _ in resultados]
-    diccionario = dict(resultados)
-    set_paises = set(lista)
-    tupla_ejemplo = resultados[0]
 
-    print("Lista:", lista)
-    print("Dict:", diccionario)
-    print("Set:", set_paises)
-    print("Tupla:", tupla_ejemplo)
+#3.1 De forma inicial no funciona
+def sumar(a, b):
+    print(a + b)
 
-print("Contador global:", contador_global)
+resultado = sumar(5, 3)
+print(resultado)
 
-# uso extra funciones
-print("Suma args:", suma_valores(1,2,3))
-mostrar_info(nombre="Adib", rol="Trader")
-print("Lambda:", doble(5))
-contenedor()
-funcion_decorada()
+
+#3.2 Ahora si
+
+def sumar(a, b):
+    return a + b
+
+resultado = sumar(5, 3)
+print("La suma es:", resultado)
+
+#3.3 Incluimos un input
+def sumar(a, b):
+    return a + b
+
+
+num1 = int(input("Introduce el primer número: "))
+num2 = int(input("Introduce el segundo número: "))
+
+resultado = sumar(num1, num2)
+
+print("La suma es:", resultado)
+
+# ==========================================
+# 4. FUNCIÓN CON CONDICIONAL
+# ==========================================
+
+def es_mayor_de_edad(edad):
+    if edad >= 18:
+        return "Es mayor de edad"
+    else:
+        return "Es menor de edad"
+
+# pedir dato al usuario
+edad = int(input("Introduce tu edad: "))
+
+# usar la función
+resultado = es_mayor_de_edad(edad)
+
+# mostrar resultado
+print(resultado)
+
+
+# ==========================================
+# 7. FUNCIÓN QUE TRABAJA CON LISTAS
+# ==========================================
+
+def sumar_lista(lista):
+    suma = 0
+    for numero in lista:
+        suma += numero
+    return suma
+
+numeros = [1, 2, 3, 4, 5]
+print("Suma total:", sumar_lista(numeros))
+
+
+# ==========================================
+# 8. FUNCIÓN QUE FILTRA DATOS (condicional + lista)
+# ==========================================
+
+def filtrar_mayores(lista):
+    mayores = []
+    
+    for numero in lista:
+        if numero > 5:
+            mayores.append(numero)
+    
+    return mayores
+
+print(filtrar_mayores([2, 7, 1, 9, 4]))
+
+
+# ==========================================
+# 9. FUNCIÓN MÁS COMPLETA (simulación real)
+# ==========================================
+
+def analizar_notas(notas):
+    
+    aprobados = 0
+    suspensos = 0
+    
+    for nota in notas:
+        if nota >= 5:
+            aprobados += 1
+        else:
+            suspensos += 1
+    
+    return aprobados, suspensos
+
+resultado = analizar_notas([4, 6, 7, 3, 9])
+print("Aprobados:", resultado[0])
+print("Suspensos:", resultado[1])
+
+
+# ==========================================
+# 10. FUNCIÓN CON TODO (parámetros + bucle + condicional + return)
+# ==========================================
+
+def buscar_numero(lista, objetivo):
+    
+    for numero in lista:
+        if numero == objetivo:
+            return "Encontrado"
+    
+    return "No encontrado"
+
+print(buscar_numero([1, 3, 5, 7], 5))
+print(buscar_numero([1, 3, 5, 7], 2))
