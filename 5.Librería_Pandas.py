@@ -1,148 +1,114 @@
-# ==========================================
-# 0. IMPORTAR LIBRERÍA
-# ==========================================
+
 
 import pandas as pd
 
 
-# ==========================================
-# 1. FUNCIÓN BÁSICA (sin pandas)
-# ==========================================
+# 1. Mostrar datos sin pandas
 
-def saludar(nombre):
-    return f"Hola {nombre}"
+nombres = ["Juan", "Ana"]
+edades = [20, 17]
 
-print(saludar("Alumno"))
+for i in range(len(nombres)):
+    print(nombres[i], "-", edades[i])
+    
+    
 
-
-# ==========================================
-# 2. CREAR DATOS (listas)
-# ==========================================
-
-def crear_datos():
-    nombres = ["Ana", "Luis", "Marta", "Pedro"]
-    edades = [15, 18, 17, 20]
-    notas = [6, 4, 8, 5]
-    return nombres, edades, notas
-
-nombres, edades, notas = crear_datos()
+# 2. Mostrar datos con pandas
 
 
-# ==========================================
-# 3. CREAR DATAFRAME
-# ==========================================
+df = pd.DataFrame({
+    "nombre": ["Juan", "Ana"],
+    "edad": [20, 17]
+})
 
-def crear_dataframe(nombres, edades, notas):
-    df = pd.DataFrame({
-        "Nombre": nombres,
-        "Edad": edades,
-        "Nota": notas
-    })
-    return df
 
-df = crear_dataframe(nombres, edades, notas)
-print("\nDataFrame inicial:")
+
+#3. Filtrar  Edad con Pandas
+
+
+
+df = pd.DataFrame({
+    "edad": [20, 17]
+})
+
+print(len(df[df["edad"] >= 18]))
+
+
+# 4. PEDIR DATOS AL USUARIO sin pandas
+
+
+nombres = []
+edades = []
+
+print("Introduce alumnos (escribe 'salir' para terminar)\n")
+
+while True:
+    nombre = input("Nombre: ")
+    
+    if nombre.lower() == "salir":
+        break
+    
+    edad = int(input("Edad: "))
+    
+    nombres.append(nombre)
+    edades.append(edad)
+
+#  FUERA del while
+print("\nLista completa:")
+
+for i in range(len(nombres)):
+    print(nombres[i], "-", edades[i])
+    
+    
+# 5. PEDIR DATOS AL USUARIO con pandas
+
+import pandas as pd
+
+nombres = []
+edades = []
+
+print("Introduce alumnos (escribe 'salir' para terminar)\n")
+
+while True:
+    nombre = input("Nombre: ")
+    
+    if nombre.lower() == "salir":
+        break
+    
+    edad = int(input("Edad: "))
+    
+    nombres.append(nombre)
+    edades.append(edad)
+
+#  Crear DataFrame (aquí entra pandas)
+df = pd.DataFrame({
+    "nombre": nombres,
+    "edad": edades
+})
+
+#  Mostrar datos en formato tabla
+print("\nLista completa (pandas):")
 print(df)
 
-
-# ==========================================
-# 4. FUNCIÓN CON CONDICIONAL (filtrar)
-# ==========================================
-
-def filtrar_aprobados(df):
-    return df[df["Nota"] >= 5]
-
-print("\nAprobados:")
-print(filtrar_aprobados(df))
+#  Generando tabla xls
+df.to_excel("alumnos.xlsx", index=False)
+print("\nArchivo 'alumnos.xlsx' creado correctamente")
 
 
-# ==========================================
-# 5. FUNCIÓN CON BUCLE (recorrer datos)
-# ==========================================
-
-def mostrar_nombres(df):
-    print("\nLista de nombres:")
-    for nombre in df["Nombre"]:
-        print(nombre)
-
-mostrar_nombres(df)
 
 
-# ==========================================
-# 6. FUNCIÓN CON BUCLE + CONDICIONAL
-# ==========================================
+#6 Filtrando desed XLS 
 
-def clasificar_notas(df):
-    
-    categorias = []
-    
-    for nota in df["Nota"]:
-        if nota >= 5:
-            categorias.append("Aprobado")
-        else:
-            categorias.append("Suspenso")
-    
-    df["Estado"] = categorias
-    return df
+import pandas as pd
 
-df = clasificar_notas(df)
-print("\nDataFrame con estado:")
+# Leer el Excel
+df = pd.read_excel("alumnos.xlsx")
+
+print("Datos completos:")
 print(df)
 
+# Filtrar mayores de edad
+mayores = df[df["edad"] >= 18]
 
-# ==========================================
-# 7. FUNCIÓN CON CÁLCULOS
-# ==========================================
-
-def nota_media(df):
-    return df["Nota"].mean()
-
-print("\nNota media:", nota_media(df))
-
-
-# ==========================================
-# 8. FUNCIÓN QUE CUENTA ELEMENTOS
-# ==========================================
-
-def contar_aprobados(df):
-    
-    contador = 0
-    
-    for nota in df["Nota"]:
-        if nota >= 5:
-            contador += 1
-    
-    return contador
-
-print("\nNúmero de aprobados:", contar_aprobados(df))
-
-
-# ==========================================
-# 9. FUNCIÓN MÁS COMPLETA
-# ==========================================
-
-def analizar_datos(df):
-    
-    total = len(df)
-    aprobados = len(df[df["Nota"] >= 5])
-    suspensos = total - aprobados
-    
-    return total, aprobados, suspensos
-
-total, aprobados, suspensos = analizar_datos(df)
-
-print("\nResumen:")
-print("Total:", total)
-print("Aprobados:", aprobados)
-print("Suspensos:", suspensos)
-
-
-# ==========================================
-# 10. FUNCIÓN EXTRA (ordenar datos)
-# ==========================================
-
-def ordenar_por_nota(df):
-    return df.sort_values(by="Nota", ascending=False)
-
-print("\nOrdenado por nota:")
-print(ordenar_por_nota(df))
+print("\nMayores de edad:")
+print(mayores)
