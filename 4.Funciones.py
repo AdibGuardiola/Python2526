@@ -1,89 +1,84 @@
-# ==========================================
-# 1. FUNCIÓN BÁSICA (sin bucles ni condicionales)
-# ==========================================
+# 4 Funciones
+
+# 1 Funcion básica
 
 def saludar():
-    print("Hola, bienvenido al programa")
+    print("Hola, bienvenido!")
 
 saludar()
 
+# 2 Funciones con parámetros
 
-# ==========================================
-# 2. FUNCIÓN CON PARÁMETRO
-# ==========================================
+def saludar_personas(nombre):
+    print("Hola", nombre, "bienvenido!")
 
-#Parámetro =>nombre
-#Argumento =>Adib
+saludar_personas("Juan")
 
-def saludar_persona(nombre):
-    print("Hola "+ nombre)
-    
-
-saludar_persona("10")
-
-#2.1 FUNCIÓN CON PARÁMETRO ,incluimos un strime
+# 2.1 Función con varios parámetros 
 
 def mostrar_edad(nombre, edad):
-    print("Hola " + nombre + ", tienes " + str(edad) + " años")
+    print("Hola", nombre, "tienes", edad, "años")
 
-mostrar_edad("Adib", 25)
+mostrar_edad("Pepe", 35)
 
 
-# ==========================================
-# 3. FUNCIÓN CON RETURN
-# ==========================================
 
-#3.1 De forma inicial no funciona
+# 3 Funciones utilizando return 
+
+# 3.1 Función sin utilizar return
+
 def sumar(a, b):
     print(a + b)
 
-resultado = sumar(5, 3)
-print(resultado)
+resultado = sumar(5, 6)
 
+print (resultado)
 
-#3.2 Ahora si
+# 3.2 Función con return
 
 def sumar(a, b):
     return a + b
 
-resultado = sumar(5, 3)
-print("La suma es:", resultado)
+print(sumar(5, 6))
 
-#3.3 Incluimos un input
+# 3.3 Funcion introduciendo parámetros
+
 def sumar(a, b):
     return a + b
 
+num1 = int(input("Introduce un número: "))
+num2 = int(input("Introduce un número: "))
 
-num1 = int(input("Introduce el primer número: "))
-num2 = int(input("Introduce el segundo número: "))
+print("La suma de los números es:", sumar(num1, num2))
 
-resultado = sumar(num1, num2)
+#3.3 Función introducioendo parámetros ,caso especial 
 
-print("La suma es:", resultado)
+def mostrar_edad():
+    nombre = input("Introduce tu nombre: ")
+    edad = int(input("Introduce tu edad: "))
+    
+    print("Hola " + nombre + ", tienes " + str(edad) + " años")
+#Otra manera
+    print("Hola", nombre, ", tienes", edad, "años")
+#Otra manera_2
+    print(f"Hola {nombre}, tienes {edad} años")
 
-# ==========================================
-# 4. FUNCIÓN CON CONDICIONAL
-# ==========================================
+mostrar_edad()
 
-def es_mayor_de_edad(edad):
+
+# 4 Funciones con condicional
+
+def mayordeedad(edad):
     if edad >= 18:
         return "Es mayor de edad"
     else:
-        return "Es menor de edad"
+        return "No es mayor de edad"
 
-# pedir dato al usuario
-edad = int(input("Introduce tu edad: "))
+resultado = int(input("dime tu edad: "))
 
-# usar la función
-resultado = es_mayor_de_edad(edad)
+print(mayordeedad(resultado))
 
-# mostrar resultado
-print(resultado)
-
-
-# ==========================================
-# 7. FUNCIÓN QUE TRABAJA CON LISTAS
-# ==========================================
+# 5 Funcion con listas
 
 def sumar_lista(lista):
     suma = 0
@@ -92,28 +87,45 @@ def sumar_lista(lista):
     return suma
 
 numeros = [1, 2, 3, 4, 5]
-print("Suma total:", sumar_lista(numeros))
+alturas = [1.75, 1.80, 1.70, 1.85, 1.90]
 
+print("La suma de la lista es:", sumar_lista(alturas))
 
-# ==========================================
-# 8. FUNCIÓN QUE FILTRA DATOS (condicional + lista)
-# ==========================================
+# 6 Funciones condicional con listas   
 
-def filtrar_mayores(lista):
+def filtar_mayores(lista):
     mayores = []
     
     for numero in lista:
         if numero > 5:
             mayores.append(numero)
-    
     return mayores
 
-print(filtrar_mayores([2, 7, 1, 9, 4]))
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+print("Los números mayores a 5 son:", filtar_mayores(numeros))
 
-# ==========================================
-# 9. FUNCIÓN MÁS COMPLETA (simulación real)
-# ==========================================
+#7 Concepto de tupla 
+datos = (10, 20)
+
+# Acceder a valores
+print(datos[0])
+print(datos[1])
+
+# Función que devuelve una tupla
+def ejemplo():
+    return 5, 10
+
+a, b = ejemplo()
+print(a, b)
+
+# Usar tuplas en un bucle
+personas = [("Juan", 20), ("Ana", 17)]
+
+for nombre, edad in personas:
+    print(nombre, edad)
+
+#8 Funciones aplicando análisis de listas
 
 def analizar_notas(notas):
     
@@ -125,25 +137,24 @@ def analizar_notas(notas):
             aprobados += 1
         else:
             suspensos += 1
-    
     return aprobados, suspensos
 
-resultado = analizar_notas([4, 6, 7, 3, 9])
-print("Aprobados:", resultado[0])
-print("Suspensos:", resultado[1])
+notas = [5, 6, 7, 8, 9, 10, 4, 3, 2, 1]
 
+aprobados, suspensos = analizar_notas(notas)
 
-# ==========================================
-# 10. FUNCIÓN CON TODO (parámetros + bucle + condicional + return)
-# ==========================================
+print("Aprobados:", aprobados)
+print("Suspensos:", suspensos)
 
-def buscar_numero(lista, objetivo):
+#9 Funcion busqueda de parámetros en lista
+
+def buscarnumero(lista, objeto):
+    contador = 0
     
     for numero in lista:
-        if numero == objetivo:
-            return "Encontrado"
-    
-    return "No encontrado"
+        if numero == objeto:
+            contador += 1
+            
+    return contador
 
-print(buscar_numero([1, 3, 5, 7], 5))
-print(buscar_numero([1, 3, 5, 7], 2))
+print(buscarnumero([1,3,2,2,2,4,3], 2))
